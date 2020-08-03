@@ -12,6 +12,6 @@ class ImageAPI:
     """
     The sole purpose of this API is to get the width and height of an image
     """
-    def load_from_url(self, url) -> Image:
+    async def load_from_url(self, url) -> Image:
         pass
 
