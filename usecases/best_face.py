@@ -50,9 +50,6 @@ async def handle_best_face(list_of_image_urls: List[str],
                            face_detection_api: FaceDetectionAPI,
                            image_api: ImageAPI):
     """
-    :param list_of_image_urls:
-    :param face_detection_api:
-    :param image_api:
     :return: he image url that contain the best face
 
     using both face detection api and image loading api this use-case
@@ -62,11 +59,10 @@ async def handle_best_face(list_of_image_urls: List[str],
         gather_images(list_of_image_urls, image_api),
         group_faces(list_of_image_urls, face_detection_api))
 
-    # TODO: what happens if we have some face detections without the image size?
-    # at this point we gathered images and faces and we can proceed
-    # with creating the following mappings
-    face_by_id = {face.id: face for face in faces}
-    image_by_id = {face.id: image_by_url[face.url] for face in faces}
+    # NOTE: if we got timed out fetching images we also remove the
+    # face detections of that url (see filters in the comprehensions)
+    face_by_id = {face.id: face for face in faces if face.url in image_by_url.keys()}
+    image_by_id = {face.id: image_by_url[face.url] for face in face_by_id.values()}
     best_face_id = best_face(face_by_id, image_by_id, groups)
     return {
         'bestFace': face_by_id[best_face_id].url,
