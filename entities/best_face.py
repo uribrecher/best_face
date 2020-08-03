@@ -13,7 +13,7 @@ class Face:
 
 
 def face_area_percent(image: Image, face: Face) -> float:
-    return (image.width * image.height) / (face.width * face.height)
+    return (face.width * face.height) / (image.width * image.height)
 
 
 def face_area_by_id(faces: Mapping[str, Face], images: Mapping[str, Image], face_id: str) -> float:
