@@ -14,4 +14,3 @@ class ImageAPI:
     """
     async def load_from_url(self, url) -> Image:
         pass
-

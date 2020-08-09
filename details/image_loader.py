@@ -18,4 +18,3 @@ class PillowImageLoader(ImageAPI):
                 width, height = pillow_image.size
                 logger.info('STOP load')
                 return Image(url=url, width=width, height=height)
-

@@ -6,7 +6,7 @@ class BestFaceTests(unittest.TestCase):
     def test_empty(self):
         faces = {}
         images = {}
-        groups = {}
+        groups = [[]]
         with self.assertRaises(ValueError):
             best_face(faces, images, groups)
 
@@ -33,6 +33,5 @@ class BestFaceTests(unittest.TestCase):
         }
         groups = [['face1', 'face2'], ['face3']]
         self.assertEqual('face2', best_face(faces, images, groups))
-
 
     # TODO: add more test cases
